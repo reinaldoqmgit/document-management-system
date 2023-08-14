@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DocumentManagementSystem {
     private final List<Document> documents = new ArrayList<>();
@@ -36,5 +37,10 @@ public class DocumentManagementSystem {
     }
     public List<Document> contents() {
         return documentsView;
+    }
+    public List<Document> search(String query) {
+        return documents.stream()
+                .filter(Query.parse(query))
+                .collect(Collectors.toList());
     }
 }
